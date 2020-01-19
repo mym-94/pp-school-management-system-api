@@ -11,3 +11,9 @@ The main entites in the system are:
 - authorities
 - subjects
 - academic_years
+## Use Case Diagram
+Below is the use case diagram. The primary actors are:
+- Teacher
+- Student
+- Admin
+![alt text](https://cdn1.savepice.ru/uploads/2020/1/20/bd3fedc877327c5c639df2cf284cdf0c-full.png)
