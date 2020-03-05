@@ -43,7 +43,11 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public void deleteById(long id) {
-        countryRepository.deleteById(id);
+        try {
+            countryRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new CountryNotFoundException(id);
+        }
     }
 
 }

@@ -9,10 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 //TODO: SMS-XXXX: secure application endpoints.
-@SpringBootApplication(exclude = {
-		org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,
-		org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration.class}
-)
+@SpringBootApplication
 @Configuration
 public class SchoolManagementSystemApplication {
 

@@ -1,9 +1,10 @@
 package com.sms.entity;
 
 import javax.persistence.*;
-
+import org.hibernate.annotations.UpdateTimestamp;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import java.util.Date;
 
 /**
  * <h1>Country Entity</h1>
@@ -17,6 +18,7 @@ import lombok.*;
 @Data
 @Table(name = "countries")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Country {
 
     @Schema(description = "Unique identifier of the Country.", example = "1")
@@ -29,8 +31,8 @@ public class Country {
     @Column(name = "name")
     private String name;
 
-    @Schema(description = "Country information updated at Date.", example = "2020-02-03 12:50:50")
-    @Column(name = "updated_at")
-    private String updatedAt;
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @UpdateTimestamp
+    private Date updatedAt;
 
 }
