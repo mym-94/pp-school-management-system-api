@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(CountryNotFoundException.class)
+    @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> customHandleNotFound(Exception ex, WebRequest request) {
         ErrorResponse errors = new ErrorResponse();
         errors.setTimestamp(LocalDateTime.now());

@@ -1,7 +1,7 @@
 package com.sms.service;
 
 import com.sms.entity.Country;
-import com.sms.exception.CountryNotFoundException;
+import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public Country findById(long id) {
-        return countryRepository.findById(id).orElseThrow(() -> new CountryNotFoundException(id));
+        return countryRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(Country.class.getName(), id));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class CountryServiceImpl implements CountryService {
         try {
             countryRepository.deleteById(id);
         } catch (Exception e) {
-            throw new CountryNotFoundException(id);
+            throw new EntityNotFoundException(Country.class.getName(), id);
         }
     }
 

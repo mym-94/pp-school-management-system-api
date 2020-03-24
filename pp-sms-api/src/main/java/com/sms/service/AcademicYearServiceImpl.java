@@ -1,7 +1,7 @@
 package com.sms.service;
 
 import com.sms.entity.AcademicYear;
-import com.sms.exception.CountryNotFoundException;
+import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.AcademicYearRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +33,7 @@ public class AcademicYearServiceImpl implements AcademicYearService {
 
     @Override
     public AcademicYear findById(long id) {
-        return academicYearRepository.findById(id).orElseThrow(() -> new CountryNotFoundException(id));
+        return academicYearRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(AcademicYear.class.getName(), id));
     }
 
     @Override
@@ -46,7 +46,7 @@ public class AcademicYearServiceImpl implements AcademicYearService {
         try {
             academicYearRepository.deleteById(id);
         } catch (Exception e) {
-            throw new CountryNotFoundException(id);
+            throw new EntityNotFoundException(AcademicYear.class.getName(), id);
         }
     }
 

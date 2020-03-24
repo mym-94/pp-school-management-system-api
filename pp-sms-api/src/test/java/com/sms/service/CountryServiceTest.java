@@ -1,8 +1,8 @@
 package com.sms.service;
 
 import com.sms.entity.Country;
-import com.sms.exception.CountryNotFoundException;
 import com.sms.repository.CountryRepository;
+import com.sms.exception.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,6 +21,7 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class CountryServiceTest {
+
     @Mock
     private CountryRepository countryRepository;
 
@@ -47,11 +48,9 @@ public class CountryServiceTest {
 
     @Test
     void testFindByIdResourceNotExist() {
-        doThrow(new CountryNotFoundException(1)).when(countryRepository).findById(1L);
+        doThrow(new EntityNotFoundException(Country.class.getName(), 1)).when(countryRepository).findById(1L);
 
-        assertThrows(CountryNotFoundException.class, () -> {
-           countryService.findById(1);
-        });
+        assertThrows(EntityNotFoundException.class, () -> countryService.findById(1));
     }
 
     @Test
@@ -71,11 +70,9 @@ public class CountryServiceTest {
 
     @Test
     void testDeleteByIdResourceNotExist() {
-        doThrow(new CountryNotFoundException(1)).when(countryRepository).deleteById(1L);
+        doThrow(new EntityNotFoundException(Country.class.getName(), 1)).when(countryRepository).deleteById(1L);
 
-        assertThrows(CountryNotFoundException.class, () -> {
-            countryService.deleteById(1);
-        });
+        assertThrows(EntityNotFoundException.class, () -> countryService.deleteById(1));
     }
 
 }

@@ -73,3 +73,10 @@ create table countries
 );
 
 
+create table academic_years
+(
+	id int auto_increment primary key,
+	name varchar(30) not null,
+	updated_at timestamp default CURRENT_TIMESTAMP not null
+);
+

@@ -27,7 +27,7 @@ public class AcademicYear {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Schema(description = "Name of the Country.", example = "First Year Primary", required = true)
+    @Schema(description = "Name of the Academic Year.", example = "First Year Primary", required = true)
     @Column(name = "name")
     private String name;
 
