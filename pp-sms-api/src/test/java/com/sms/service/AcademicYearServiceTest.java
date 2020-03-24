@@ -28,10 +28,12 @@ public class AcademicYearServiceTest {
     @InjectMocks
     private AcademicYearService academicYearService = new AcademicYearServiceImpl(academicYearRepository);
 
+    private static final String ENTITY_NAME = "test academic year";
+
     @Test
     void testFindAll() {
         List<AcademicYear> academicYears = new ArrayList<>();
-        academicYears.add(new AcademicYear(1, "test academic year", new Date()));
+        academicYears.add(new AcademicYear(1, ENTITY_NAME, new Date()));
         when(academicYearRepository.findAll()).thenReturn(academicYears);
 
         assertEquals(1, academicYearService.findAll().size());
@@ -39,11 +41,11 @@ public class AcademicYearServiceTest {
 
     @Test
     void testFindByIdResourceExist() {
-        AcademicYear academicYear = new AcademicYear(1, "test academic year", new Date());
+        AcademicYear academicYear = new AcademicYear(1, ENTITY_NAME, new Date());
         Optional<AcademicYear> singleAcademicYearById = Optional.of(academicYear);
         when(academicYearRepository.findById(anyLong())).thenReturn(singleAcademicYearById);
 
-        assertEquals("test academic year", academicYearService.findById(1).getName());
+        assertEquals(ENTITY_NAME, academicYearService.findById(1).getName());
     }
 
     @Test
@@ -55,7 +57,7 @@ public class AcademicYearServiceTest {
 
     @Test
     void testSaveOrUpdate() {
-        AcademicYear academicYear = new AcademicYear(1, "test academic year", new Date());
+        AcademicYear academicYear = new AcademicYear(1, ENTITY_NAME, new Date());
         academicYearService.saveOrUpdate(academicYear);
 
         verify(academicYearRepository).save(academicYear);

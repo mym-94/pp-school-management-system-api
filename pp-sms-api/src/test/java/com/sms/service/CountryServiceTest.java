@@ -28,10 +28,12 @@ public class CountryServiceTest {
     @InjectMocks
     private CountryService countryService = new CountryServiceImpl(countryRepository);
 
+    private static final String ENTITY_NAME = "test country";
+
     @Test
     void testFindAll() {
         List<Country> countries = new ArrayList<>();
-        countries.add(new Country(1, "test country", new Date()));
+        countries.add(new Country(1, ENTITY_NAME, new Date()));
         when(countryRepository.findAll()).thenReturn(countries);
 
         assertEquals(1, countryService.findAll().size());
@@ -39,11 +41,11 @@ public class CountryServiceTest {
 
     @Test
     void testFindByIdResourceExist() {
-        Country country = new Country(1, "test country", new Date());
+        Country country = new Country(1, ENTITY_NAME, new Date());
         Optional<Country> singleCountryById = Optional.of(country);
         when(countryRepository.findById(anyLong())).thenReturn(singleCountryById);
 
-        assertEquals("test country", countryService.findById(1).getName());
+        assertEquals(ENTITY_NAME, countryService.findById(1).getName());
     }
 
     @Test
@@ -55,7 +57,7 @@ public class CountryServiceTest {
 
     @Test
     void testSaveOrUpdate() {
-        Country country = new Country(1, "test country", new Date());
+        Country country = new Country(1, ENTITY_NAME, new Date());
         countryService.saveOrUpdate(country);
 
         verify(countryRepository).save(country);
