@@ -4,9 +4,11 @@ import com.sms.entity.Subject;
 import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SubjectServiceImpl implements SubjectService {
 
     private SubjectRepository subjectRepository;

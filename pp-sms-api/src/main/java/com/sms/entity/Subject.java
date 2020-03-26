@@ -15,6 +15,12 @@ import java.util.Date;
 @AllArgsConstructor
 public class Subject {
 
+    public Subject(long id, String name, Date updatedAt) {
+        this.id = id;
+        this.name = name;
+        this.updatedAt = updatedAt;
+    }
+
     @Schema(description = "Unique identifier of the subject.", example = "1")
     @Id
     @Column(name = "id")
