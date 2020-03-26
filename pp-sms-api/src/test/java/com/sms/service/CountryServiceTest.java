@@ -1,8 +1,8 @@
 package com.sms.service;
 
 import com.sms.entity.Country;
-import com.sms.exception.CountryNotFoundException;
 import com.sms.repository.CountryRepository;
+import com.sms.exception.EntityNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -21,16 +21,19 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class CountryServiceTest {
+
     @Mock
     private CountryRepository countryRepository;
 
     @InjectMocks
     private CountryService countryService = new CountryServiceImpl(countryRepository);
 
+    private static final String ENTITY_NAME = "test country";
+
     @Test
     void testFindAll() {
         List<Country> countries = new ArrayList<>();
-        countries.add(new Country(1, "test country", new Date()));
+        countries.add(new Country(1, ENTITY_NAME, new Date()));
         when(countryRepository.findAll()).thenReturn(countries);
 
         assertEquals(1, countryService.findAll().size());
@@ -38,25 +41,23 @@ public class CountryServiceTest {
 
     @Test
     void testFindByIdResourceExist() {
-        Country country = new Country(1, "test country", new Date());
+        Country country = new Country(1, ENTITY_NAME, new Date());
         Optional<Country> singleCountryById = Optional.of(country);
         when(countryRepository.findById(anyLong())).thenReturn(singleCountryById);
 
-        assertEquals("test country", countryService.findById(1).getName());
+        assertEquals(ENTITY_NAME, countryService.findById(1).getName());
     }
 
     @Test
     void testFindByIdResourceNotExist() {
-        doThrow(new CountryNotFoundException(1)).when(countryRepository).findById(1L);
+        doThrow(new EntityNotFoundException(Country.class.getName(), 1)).when(countryRepository).findById(1L);
 
-        assertThrows(CountryNotFoundException.class, () -> {
-           countryService.findById(1);
-        });
+        assertThrows(EntityNotFoundException.class, () -> countryService.findById(1));
     }
 
     @Test
     void testSaveOrUpdate() {
-        Country country = new Country(1, "test country", new Date());
+        Country country = new Country(1, ENTITY_NAME, new Date());
         countryService.saveOrUpdate(country);
 
         verify(countryRepository).save(country);
@@ -71,11 +72,9 @@ public class CountryServiceTest {
 
     @Test
     void testDeleteByIdResourceNotExist() {
-        doThrow(new CountryNotFoundException(1)).when(countryRepository).deleteById(1L);
+        doThrow(new EntityNotFoundException(Country.class.getName(), 1)).when(countryRepository).deleteById(1L);
 
-        assertThrows(CountryNotFoundException.class, () -> {
-            countryService.deleteById(1);
-        });
+        assertThrows(EntityNotFoundException.class, () -> countryService.deleteById(1));
     }
 
 }

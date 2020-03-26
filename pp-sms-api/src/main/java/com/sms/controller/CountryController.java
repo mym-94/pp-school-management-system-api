@@ -35,7 +35,7 @@ public class CountryController {
     }
 
     @GetMapping
-    @Operation(summary = "Find all Countries", description = "RESTFUL endpoint returning list of Countries", tags = {"country"})
+    @Operation(summary = "Find all Countries", description = "RESTFUL endpoint returning list of Countries", tags = {"Country"})
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "List of Countries",
             content = @Content(array = @ArraySchema(schema = @Schema(implementation = Country.class))))})
     public List<Country> findAll() {
