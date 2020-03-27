@@ -41,15 +41,23 @@ public class AcademicYearController {
         return academicYearService.findById(id);
     }
 
-    @Operation(summary = "Add a new Academic Year", description = "Save/Update a single Academic Year", tags = {"AcademicYear"})
+    @Operation(summary = "Add a new Academic Year", description = "Save a single Academic Year", tags = {"AcademicYear"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Academic Year created",
                     content = @Content(schema = @Schema(implementation = AcademicYear.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input")})
     @PostMapping
-    public AcademicYear saveOrUpdate(@RequestBody AcademicYear academicYear) {
+    public AcademicYear save(@RequestBody AcademicYear academicYear) {
         return academicYearService.saveOrUpdate(academicYear);
     }
+
+    @Operation(summary = "update existing AcademicYear", description = "Update a single AcademicYear", tags = {"AcademicYear"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "AcademicYear updated",
+                    content = @Content(schema = @Schema(implementation = AcademicYear.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input")})
+    @PutMapping
+    public AcademicYear update(@RequestBody AcademicYear academicYear) { return academicYearService.saveOrUpdate(academicYear); }
 
     @Operation(summary = "Deletes an Academic Year", description = "Delete a single Academic Year", tags = { "AcademicYear" })
     @ApiResponses(value = {

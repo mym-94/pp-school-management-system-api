@@ -45,8 +45,8 @@ public class AcademicYear {
     @OneToMany(mappedBy="academicYear", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Subject> subjects;
 
-    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     @UpdateTimestamp
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date updatedAt;
 
     public Set<Subject> getSubjects() {

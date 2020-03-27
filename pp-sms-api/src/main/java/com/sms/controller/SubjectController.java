@@ -43,15 +43,21 @@ public class SubjectController {
         return subjectService.findById(id);
     }
 
-    @Operation(summary = "Add a new Subject", description = "Save/Update a single Subject", tags = {"Subject"})
+    @Operation(summary = "Add a new Subject", description = "Update a single Subject", tags = {"Subject"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Subject created",
                     content = @Content(schema = @Schema(implementation = Subject.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input")})
     @PostMapping
-    public Subject saveOrUpdate(@RequestBody Subject subject) {
-        return subjectService.saveOrUpdate(subject);
-    }
+    public Subject save(@RequestBody Subject subject) { return subjectService.saveOrUpdate(subject); }
+
+    @Operation(summary = "update existing Subject", description = "Update a single Subject", tags = {"Subject"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Subject updated",
+                    content = @Content(schema = @Schema(implementation = Subject.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input")})
+    @PutMapping
+    public Subject update(@RequestBody Subject subject) { return subjectService.saveOrUpdate(subject); }
 
     @Operation(summary = "Deletes a Subject", description = "Delete a single Subject", tags = { "Subject" })
     @ApiResponses(value = {
