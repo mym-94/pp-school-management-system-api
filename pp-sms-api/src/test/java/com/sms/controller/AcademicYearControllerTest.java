@@ -73,7 +73,7 @@ public class AcademicYearControllerTest {
     }
 
     @Test
-    void testSaveOrUpdate() throws Exception{
+    void testSave() throws Exception{
         // given
         Date testDateObject = new Date(1583413273);
         AcademicYear academicYear = new AcademicYear(1, "test", testDateObject);
@@ -81,7 +81,22 @@ public class AcademicYearControllerTest {
 
         // when + then
         mockMvc.perform(post(ACADEMIC_YEAR_URL)
-                .content("{\"id\": 11,\"email\": \"testagain@again.again\"}")
+                .content("{\"name\": \"test\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'id': 1, 'name': 'test', 'updatedAt': \"1970-01-19T07:50:13.273+0000\"}"));
+    }
+
+    @Test
+    void testUpdate() throws Exception{
+        // given
+        Date testDateObject = new Date(1583413273);
+        AcademicYear academicYear = new AcademicYear(1, "test", testDateObject);
+        given(academicYearService.saveOrUpdate(any(AcademicYear.class))).willReturn(academicYear);
+
+        // when + then
+        mockMvc.perform(put(ACADEMIC_YEAR_URL)
+                .content("{\"name\": \"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'id': 1, 'name': 'test', 'updatedAt': \"1970-01-19T07:50:13.273+0000\"}"));

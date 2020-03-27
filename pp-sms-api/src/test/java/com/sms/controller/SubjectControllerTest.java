@@ -71,7 +71,7 @@ public class SubjectControllerTest {
     }
 
     @Test
-    void testSaveOrUpdate() throws Exception{
+    void testSave() throws Exception{
         // given
         Date testDateObject = new Date(1583413273);
         Subject subject = new Subject(1, "test", testDateObject);
@@ -79,7 +79,22 @@ public class SubjectControllerTest {
 
         // when + then
         mockMvc.perform(post(SUBJECT_URL)
-                .content("{\"id\": 11,\"email\": \"testagain@again.again\"}")
+                .content("{\"name\": \"test\"}")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{'id': 1, 'name': 'test', 'updatedAt': \"1970-01-19T07:50:13.273+0000\"}"));
+    }
+
+    @Test
+    void testUpdate() throws Exception{
+        // given
+        Date testDateObject = new Date(1583413273);
+        Subject subject = new Subject(1, "test", testDateObject);
+        given(subjectService.saveOrUpdate(any(Subject.class))).willReturn(subject);
+
+        // when + then
+        mockMvc.perform(put(SUBJECT_URL)
+                .content("{\"id\": 1,\"name\": \"test\"}")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{'id': 1, 'name': 'test', 'updatedAt': \"1970-01-19T07:50:13.273+0000\"}"));

@@ -57,7 +57,9 @@ public class AcademicYearController {
                     content = @Content(schema = @Schema(implementation = AcademicYear.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input")})
     @PutMapping
-    public AcademicYear update(@RequestBody AcademicYear academicYear) { return academicYearService.saveOrUpdate(academicYear); }
+    public AcademicYear update(@RequestBody AcademicYear academicYear) {
+        return academicYearService.saveOrUpdate(academicYear);
+    }
 
     @Operation(summary = "Deletes an Academic Year", description = "Delete a single Academic Year", tags = { "AcademicYear" })
     @ApiResponses(value = {

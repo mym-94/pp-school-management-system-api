@@ -57,7 +57,7 @@ public class CountryController {
                     content = @Content(schema = @Schema(implementation = Country.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input")})
     @PostMapping
-    public Country saveOrUpdate(@RequestBody Country country) {
+    public Country save(@RequestBody Country country) {
         return countryService.saveOrUpdate(country);
     }
 
