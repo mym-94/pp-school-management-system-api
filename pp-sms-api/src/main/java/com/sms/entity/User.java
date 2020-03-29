@@ -46,4 +46,8 @@ public class User {
     @Column(name = "enabled")
     protected boolean enabled;
 
+    @UpdateTimestamp
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date updatedAt;
+
 }
