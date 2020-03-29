@@ -1,7 +1,6 @@
 package com.sms.controller;
 
 import com.sms.entity.AcademicYear;
-import com.sms.entity.Country;
 import com.sms.service.AcademicYearService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -28,7 +27,7 @@ public class AcademicYearController {
     @GetMapping
     @Operation(summary = "Find all Academic Years", description = "RESTFUL endpoint returning list of academic Years", tags = {"AcademicYear"})
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "List of Academic Years",
-            content = @Content(array = @ArraySchema(schema = @Schema(implementation = Country.class))))})
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = AcademicYear.class))))})
     public List<AcademicYear> findAll() {
         return academicYearService.findAll();
     }
@@ -36,19 +35,29 @@ public class AcademicYearController {
     @Operation(summary = "Find Academic Year by ID", description = "Returns a single Academic year", tags = {"AcademicYear"})
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "successful operation",
             content = @Content(schema = @Schema(implementation = AcademicYear.class))),
-            @ApiResponse(responseCode = "404", description = "Country not found")})
+            @ApiResponse(responseCode = "404", description = "Academic Year not found")})
     @GetMapping("/{id}")
     public AcademicYear findById(@PathVariable("id") long id) {
         return academicYearService.findById(id);
     }
 
-    @Operation(summary = "Add a new Academic Year", description = "Save/Update a single Academic Year", tags = {"AcademicYear"})
+    @Operation(summary = "Add a new Academic Year", description = "Save a single Academic Year", tags = {"AcademicYear"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Academic Year created",
                     content = @Content(schema = @Schema(implementation = AcademicYear.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input")})
     @PostMapping
-    public AcademicYear saveOrUpdate(@RequestBody AcademicYear academicYear) {
+    public AcademicYear save(@RequestBody AcademicYear academicYear) {
+        return academicYearService.saveOrUpdate(academicYear);
+    }
+
+    @Operation(summary = "update existing AcademicYear", description = "Update a single AcademicYear", tags = {"AcademicYear"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "AcademicYear updated",
+                    content = @Content(schema = @Schema(implementation = AcademicYear.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input")})
+    @PutMapping
+    public AcademicYear update(@RequestBody AcademicYear academicYear) {
         return academicYearService.saveOrUpdate(academicYear);
     }
 

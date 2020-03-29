@@ -1,6 +1,6 @@
 package com.sms.repository;
 
-import com.sms.entity.Country;
+import com.sms.entity.Subject;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +13,5 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface CountryRepository extends JpaRepository<Country, Long> {
+public interface SubjectRepository extends JpaRepository<Subject, Long> {
 }

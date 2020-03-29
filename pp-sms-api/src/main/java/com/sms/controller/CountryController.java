@@ -51,15 +51,23 @@ public class CountryController {
         return countryService.findById(id);
     }
 
-    @Operation(summary = "Add a new Country", description = "Save/Update a single Country", tags = {"Country"})
+    @Operation(summary = "Add a new Country", description = "Save a single Country", tags = {"Country"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Country created",
                     content = @Content(schema = @Schema(implementation = Country.class))),
             @ApiResponse(responseCode = "400", description = "Invalid input")})
     @PostMapping
-    public Country saveOrUpdate(@RequestBody Country country) {
+    public Country save(@RequestBody Country country) {
         return countryService.saveOrUpdate(country);
     }
+
+    @Operation(summary = "update existing Country", description = "Update a single Country", tags = {"Country"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Country updated",
+                    content = @Content(schema = @Schema(implementation = Country.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input")})
+    @PutMapping
+    public Country update(@RequestBody Country country) { return countryService.saveOrUpdate(country); }
 
     @Operation(summary = "Deletes a Country", description = "Delete a single Country", tags = { "Country" })
     @ApiResponses(value = {

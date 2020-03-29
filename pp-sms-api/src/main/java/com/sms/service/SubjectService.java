@@ -1,6 +1,6 @@
 package com.sms.service;
 
-import com.sms.entity.Country;
+import com.sms.entity.Subject;
 
 import java.util.List;
 
@@ -12,11 +12,11 @@ import java.util.List;
  * @version 1.0.0
  */
 
-public interface CountryService {
+public interface SubjectService {
 
-    List<Country> findAll();
-    Country findById(long id);
-    Country saveOrUpdate(Country country);
+    List<Subject> findAll();
+    Subject findById(long id);
+    Subject saveOrUpdate(Subject subject);
     void deleteById(long id);
 
 }
