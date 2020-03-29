@@ -1,8 +1,6 @@
 package com.sms.controller;
 
 import com.sms.entity.AcademicYear;
-import com.sms.entity.Student;
-import com.sms.entity.Subject;
 import com.sms.service.AcademicYearService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -15,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/v1/academicyears")

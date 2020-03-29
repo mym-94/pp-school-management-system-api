@@ -5,12 +5,10 @@ import com.sms.entity.Subject;
 import com.sms.entity.User;
 import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.AdminRepository;
-import com.sms.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AdminServiceImpl implements AdminService {
