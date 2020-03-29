@@ -34,9 +34,12 @@ public class Subject {
     private String name;
 
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name="academic_year_id", nullable=false)
     private AcademicYear academicYear;
+
+    @ManyToOne
+    @JoinColumn(name="teacher_id", nullable=false)
+    private Teacher teacher;
 
     @UpdateTimestamp
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

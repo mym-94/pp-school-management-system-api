@@ -1,7 +1,6 @@
 package com.sms.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,39 +9,34 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
-import java.util.UUID;
 
 @Table(name = "users")
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
 
-    public User(Teacher teacher, String password, boolean enabled) {
-        this.teacher = teacher;
+    public User(String username, String password, boolean enabled) {
+        this.username = username;
         this.password = password;
         this.enabled = enabled;
     }
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
+    @Column(name = "username")
+    protected String username;
+
     @Column(name = "password")
-    private String password;
+    protected String password;
 
     @Column(name = "enabled")
-    private boolean enabled;
+    protected boolean enabled;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_uuid", referencedColumnName = "uuid")
-    private Teacher teacher;
 }
-
-
-
-

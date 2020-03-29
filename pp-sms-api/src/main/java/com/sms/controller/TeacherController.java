@@ -1,7 +1,6 @@
 package com.sms.controller;
 
-import com.sms.entity.AcademicYear;
-import com.sms.entity.Teacher;
+import com.sms.entity.*;
 import com.sms.service.TeacherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,19 @@ public class TeacherController {
     @Autowired
     public TeacherController(TeacherService teacherService) { this.teacherService = teacherService; }
 
+    @GetMapping("/{id}")
+    public Teacher findById(@PathVariable("id") long id) {
+        return teacherService.findById(id);
+    }
+
     @PostMapping
-    public Teacher save(@RequestBody Teacher teacher) {
-        return teacherService.save(teacher);
+    public User save(@RequestBody Teacher teacher) {
+        return teacherService.saveOrUpdate(teacher);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") long id) {
+        teacherService.deleteById(id);
     }
 
 }

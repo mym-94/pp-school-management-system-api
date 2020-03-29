@@ -2,11 +2,15 @@ package com.sms.entity;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.annotations.UpdateTimestamp;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -41,20 +45,16 @@ public class AcademicYear {
     @Column(name = "name")
     private String name;
 
-    @JsonManagedReference
+    @JsonIgnore
     @OneToMany(mappedBy="academicYear", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Subject> subjects;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="academicYear", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<Student> students;
 
     @UpdateTimestamp
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date updatedAt;
-
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
 
 }

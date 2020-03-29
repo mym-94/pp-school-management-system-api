@@ -13,25 +13,22 @@ import java.util.Date;
 import java.util.Set;
 import java.util.UUID;
 
-@Table(name = "teachers")
+@Table(name = "students")
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
-public class Teacher extends User {
+public class Student extends User {
 
-    public Teacher(String username, String password, String degree, int yearsOfExperience, boolean enabled) {
+    public Student(String username, String password, AcademicYear academicYear, boolean enabled) {
         this.username = username;
         this.password = password;
-        this.degree = degree;
-        this.yearsOfExperience = yearsOfExperience;
+        this.academicYear = academicYear;
         this.enabled = enabled;
     }
 
-    @Column(name = "degree")
-    private String degree;
-
-    @Column(name = "years_of_experience")
-    private int yearsOfExperience;
+    @ManyToOne
+    @JoinColumn(name="academic_year_id", nullable=false)
+    private AcademicYear academicYear;
 
 }
