@@ -26,10 +26,10 @@ public class SubjectController {
         this.subjectService = subjectService;
     }
 
-    @GetMapping
     @Operation(summary = "Find all subjects", description = "RESTFUL endpoint returning list of Subjects", tags = {"Subject"})
     @ApiResponses(value = {@ApiResponse(responseCode = "200", description = "List of Subjects",
             content = @Content(array = @ArraySchema(schema = @Schema(implementation = Subject.class))))})
+    @GetMapping
     public List<Subject> findAll() {
         return subjectService.findAll();
     }
@@ -59,7 +59,7 @@ public class SubjectController {
     @PutMapping
     public Subject update(@RequestBody Subject subject) { return subjectService.saveOrUpdate(subject); }
 
-    @Operation(summary = "Deletes a Subject", description = "Delete a single Subject", tags = { "Subject" })
+    @Operation(summary = "Deletes a Subject", description = "Delete a single Subject", tags = {"Subject"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "successful operation"),
             @ApiResponse(responseCode = "404", description = "Subject not found") })

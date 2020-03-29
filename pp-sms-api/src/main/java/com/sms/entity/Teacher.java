@@ -1,6 +1,7 @@
 package com.sms.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,9 +29,13 @@ public class Teacher extends User {
         this.enabled = enabled;
     }
 
+    @Schema(description = "Teacher's degree.", example = "junior teacher", required = true)
+    @NotNull
     @Column(name = "degree")
     private String degree;
 
+    @Schema(description = "Teacher's years of experience number.", example = "1", required = true)
+    @NotNull
     @Column(name = "years_of_experience")
     private int yearsOfExperience;
 

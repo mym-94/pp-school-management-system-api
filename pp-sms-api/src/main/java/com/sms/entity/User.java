@@ -1,6 +1,7 @@
 package com.sms.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Table(name = "users")
@@ -30,12 +32,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private long id;
 
+    @Schema(description = "Name of user.", example = "John", required = true)
+    @NotNull
     @Column(name = "username")
     protected String username;
 
+    @Schema(description = "Password of user.", example = "JohnPassword1234", required = true)
+    @NotNull
     @Column(name = "password")
     protected String password;
 
+    @Schema(description = "User state in the system.", example = "true", required = false)
     @Column(name = "enabled")
     protected boolean enabled;
 

@@ -27,6 +27,7 @@ public class Admin extends User {
         this.enabled = enabled;
     }
 
+    @Schema(description = "Title of admin user.", example = "Head Master", required = false)
     @Column(name = "title", nullable = false)
     private String title;
 }

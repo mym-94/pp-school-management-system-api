@@ -1,6 +1,7 @@
 package com.sms.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -41,6 +42,7 @@ public class AcademicYear {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull
     @Schema(description = "Name of the Academic Year.", example = "First Year Primary", required = true)
     @Column(name = "name")
     private String name;

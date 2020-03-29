@@ -1,5 +1,6 @@
 package com.sms.service;
 
+import com.sms.entity.Subject;
 import com.sms.entity.Teacher;
 import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.TeacherRepository;
@@ -35,7 +36,11 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public void deleteById(long id) {
-        teacherRepository.deleteById(id);
+        try {
+            teacherRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new EntityNotFoundException(Subject.class.getName(), id);
+        }
     }
 
 }

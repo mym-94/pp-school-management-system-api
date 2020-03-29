@@ -1,6 +1,7 @@
 package com.sms.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -30,6 +31,7 @@ public class Subject {
     private long id;
 
     @Schema(description = "name of the subject.", example = "Mathematics-2")
+    @NotNull
     @Column(name = "name")
     private String name;
 

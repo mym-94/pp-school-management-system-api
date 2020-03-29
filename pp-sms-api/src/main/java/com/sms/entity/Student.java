@@ -1,6 +1,7 @@
 package com.sms.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,7 @@ public class Student extends User {
         this.enabled = enabled;
     }
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name="academic_year_id", nullable=false)
     private AcademicYear academicYear;

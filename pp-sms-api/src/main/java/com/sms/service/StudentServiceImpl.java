@@ -1,6 +1,7 @@
 package com.sms.service;
 
 import com.sms.entity.Student;
+import com.sms.entity.Subject;
 import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteById(long id) {
-        studentRepository.deleteById(id);
+        try {
+            studentRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new EntityNotFoundException(Subject.class.getName(), id);
+        }
     }
 
 }

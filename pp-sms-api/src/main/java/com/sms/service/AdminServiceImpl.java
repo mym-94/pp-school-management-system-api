@@ -1,6 +1,7 @@
 package com.sms.service;
 
 import com.sms.entity.Admin;
+import com.sms.entity.Subject;
 import com.sms.entity.User;
 import com.sms.exception.EntityNotFoundException;
 import com.sms.repository.AdminRepository;
@@ -39,7 +40,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void deleteById(long id) {
-        adminRepository.deleteById(id);
+        try {
+            adminRepository.deleteById(id);
+        } catch (Exception e) {
+            throw new EntityNotFoundException(Subject.class.getName(), id);
+        }
     }
 
 }
